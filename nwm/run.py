@@ -8,7 +8,7 @@ import pynvml
 from tqdm import tqdm
 
 INPUT_DIR = "/media/cheliu/world_model/nwm_work_dirs/data/recon"
-OUTPUT_DIR = "/media/cheliu/world_model/nwm_work_dirs/data/recon_magi_output"
+OUTPUT_DIR = "/media/cheliu/world_model/nwm_work_dirs/data/recon_magi_output_len4"
 PREDICT_SCRIPT = os.path.join(os.path.dirname(__file__), "predict.py")
 MIN_FREE_MEM = 20 * 1024 ** 3  # 20GB
 CHECK_INTERVAL = 10  # seconds
@@ -61,10 +61,8 @@ def worker(case_dir, gpu_id, progress):
             "--pkl_path", traj_path,
             "--output_path", out_path,
             "--curr_time", str(int(img_base)),
-            "--goal_time", str(int(img_base) + 32),
-            "--len_traj_pred", str(32),
-            "--metric_waypoint_spacing", str(0.25),
-            "--normalize",
+            "--goal_time", str(int(img_base) + 4),
+            "--len_traj_pred", str(4),
         ]
         env = os.environ.copy()
         env["CUDA_VISIBLE_DEVICES"] = str(gpu_id)

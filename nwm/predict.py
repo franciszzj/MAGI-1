@@ -195,13 +195,13 @@ def main():
         '--mode', type=str, choices=['t2v', 'i2v', 'v2v'], required=True, help='Mode: t2v, i2v, v2v')
     parser.add_argument('--curr_time', type=int, default=0,
                         help='Current time index for trajectory')
-    parser.add_argument('--goal_time', type=int, default=32,
+    parser.add_argument('--goal_time', type=int, default=4,
                         help='Goal time index for trajectory')
-    parser.add_argument('--len_traj_pred', type=int, default=32,
+    parser.add_argument('--len_traj_pred', type=int, default=4,
                         help='Length of trajectory prediction')
     parser.add_argument('--metric_waypoint_spacing', type=float,
                         default=0.25, help='Normalization factor for positions')
-    parser.add_argument('--normalize', action='store_true',
+    parser.add_argument('--normalize', type=bool, default=True,
                         help='Whether to normalize output')
     parser.add_argument('--prompt_type', type=int,
                         help='Prompt type: 1 or 2. If not provided, will be determined by len_traj_pred.')
