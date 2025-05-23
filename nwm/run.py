@@ -13,7 +13,7 @@ OUTPUT_DIR = f"/media/cheliu/world_model/nwm_work_dirs/data/recon_magi_output_le
 PREDICT_SCRIPT = os.path.join(os.path.dirname(__file__), "predict.py")
 MIN_FREE_MEM = 20 * 1024 ** 3  # 20GB
 CHECK_INTERVAL = 10  # seconds
-GPU_LAUNCH_INTERVAL = 120  # 2 minutes in seconds
+GPU_LAUNCH_INTERVAL = 180  # 3 minutes in seconds
 
 
 def get_all_cases(input_dir):
