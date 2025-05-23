@@ -7,8 +7,9 @@ from multiprocessing import Process, Queue, Manager
 import pynvml
 from tqdm import tqdm
 
+len_traj_pred = int(os.environ.get("LEN_TRAJ_PRED", 4))
 INPUT_DIR = "/media/cheliu/world_model/nwm_work_dirs/data/recon"
-OUTPUT_DIR = "/media/cheliu/world_model/nwm_work_dirs/data/recon_magi_output_len4"
+OUTPUT_DIR = f"/media/cheliu/world_model/nwm_work_dirs/data/recon_magi_output_len{len_traj_pred}"
 PREDICT_SCRIPT = os.path.join(os.path.dirname(__file__), "predict.py")
 MIN_FREE_MEM = 20 * 1024 ** 3  # 20GB
 CHECK_INTERVAL = 10  # seconds
@@ -53,7 +54,7 @@ def worker(case_dir, gpu_id, progress):
     image_files, traj_path = find_case_files(case_dir)
     for image_path in image_files:
         img_base = os.path.splitext(os.path.basename(image_path))[0]
-        out_path = os.path.join(OUTPUT_DIR, f"{case_name}_{img_base}.mp4")
+        out_path = os.path.join(OUTPUT_DIR, f"{case_name}_{img_base}_{int(img_base) + len_traj_pred}.mp4")
         cmd = [
             sys.executable, PREDICT_SCRIPT,
             "--mode", "i2v",
@@ -61,8 +62,8 @@ def worker(case_dir, gpu_id, progress):
             "--pkl_path", traj_path,
             "--output_path", out_path,
             "--curr_time", str(int(img_base)),
-            "--goal_time", str(int(img_base) + 4),
-            "--len_traj_pred", str(4),
+            "--goal_time", str(int(img_base) + len_traj_pred),
+            "--len_traj_pred", str(len_traj_pred),
         ]
         env = os.environ.copy()
         env["CUDA_VISIBLE_DEVICES"] = str(gpu_id)

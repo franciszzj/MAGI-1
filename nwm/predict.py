@@ -93,8 +93,7 @@ def compute_actions(
     if len(yaw.shape) == 2:
         yaw = yaw.squeeze(1)
 
-    if yaw.shape != (len_traj_pred + 1,):
-        raise ValueError("Yaw shape mismatch.")
+    assert len(positions) == len(yaw), f"Positions and yaw length mismatch. Positions length: {len(positions)}, yaw length: {len(yaw)}"
 
     waypoints_pos = to_local_coords(positions, positions[0], yaw[0])
     waypoints_yaw = angle_difference(yaw[0], yaw)
