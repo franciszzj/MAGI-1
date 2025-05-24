@@ -9,7 +9,7 @@ from tqdm import tqdm
 
 len_traj_pred = int(os.environ.get("LEN_TRAJ_PRED", 4))
 INPUT_DIR = "/media/cheliu/world_model/nwm_work_dirs/data/recon"
-OUTPUT_DIR = f"/media/cheliu/world_model/nwm_work_dirs/data/recon_magi_output_len{len_traj_pred}"
+OUTPUT_DIR = f"/media/cheliu/world_model/nwm_work_dirs/results/recon_magi_output_len{len_traj_pred}"
 PREDICT_SCRIPT = os.path.join(os.path.dirname(__file__), "predict.py")
 MIN_FREE_MEM = 20 * 1024 ** 3  # 20GB
 CHECK_INTERVAL = 10  # seconds
